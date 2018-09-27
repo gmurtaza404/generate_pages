@@ -65,7 +65,7 @@ def generate_pages():
 
         #image file
         img_name = filter( (lambda y: args.img_format in y) ,os.listdir("../pictures") )[0]
-        concat_pic = ("{}/pictures/{} ".format(root_directory,img_name)) * (x) + "{}/pictures/{}".format(root_directory,img_name)
+        concat_pic = ("{}/pictures/{} ".format(root_directory,img_name)) * (0) + "{}/pictures/{}".format(root_directory,img_name)
         picture_generate_command = "convert {} +append output_img{}  > {}/logs.txt".format(concat_pic,args.img_format,root_directory)
         os.system(picture_generate_command)
 
@@ -80,7 +80,7 @@ def generate_pages():
 
         # make html
         imageHtml = " <div id =\"images\"> <img src = \"output_img{}\" /></div>".format(args.img_format)
-        
+        imageHtml = imageHtml*(x+1)
         videoHtml = "<div id = \"video\"> <video width=\"{}\" height=\"{}\" controls><source src=\"out_video{}\" type=\"video/mp4\"></video></div>".format(video_width,video_height,args.vid_format)
         
         codeHtml = "<div id = \"code\"><script src = \"code.js\"> </script></div>"
