@@ -8,7 +8,7 @@ headerHtml ="<html lang=\"en\"><head><meta charset=\"UTF-8\"> <meta name=\"viewp
 rootHtml = "<div id=\"root\"> <p> This page is just an artificial memeory load </p> <p> for sake of comaparison each div will take same amount of space</p></div>"
 video_width = "320"
 video_height = "240"
-video_loop = True
+
 
 def get_image_size(image_name):
     with Image.open(image_name) as img:
@@ -24,8 +24,8 @@ def make_html(img,vid,code):
     tempHtml = headerHtml + "<body>" + rootHtml
     tempHtml = tempHtml +img+vid+code
     tempHtml = tempHtml + "</body>" + "</html>"
-    soup = BeautifulSoup(tempHtml, 'html.parser')
-    tempHtml = soup.prettify()
+    #soup = BeautifulSoup(tempHtml, 'html.parser')
+    #tempHtml = soup.prettify()
     return tempHtml
 
 
@@ -80,11 +80,8 @@ def generate_pages():
 
         # make html
         imageHtml = " <div id =\"images\"> <img src = \"output_img{}\" /></div>".format(args.img_format)
-        videoHtml = ""
-        if video_loop:
-            videoHtml = "<div id = \"video\"> <video width=\"{}\" height=\"{}\" controls loop><source src=\"out_video{}\" type=\"video/mp4\"></video></div>".format(video_width,video_height,args.vid_format)
-        else:
-            videoHtml = "<div id = \"video\"> <video width=\"{}\" height=\"{}\" controls><source src=\"out_video{}\" type=\"video/mp4\"></video></div>".format(video_width,video_height,args.vid_format)
+        
+        videoHtml = "<div id = \"video\"> <video width=\"{}\" height=\"{}\" controls><source src=\"out_video{}\" type=\"video/mp4\"></video></div>".format(video_width,video_height,args.vid_format)
         
         codeHtml = "<div id = \"code\"><script src = \"code.js\"> </script></div>"
         html = make_html(imageHtml,videoHtml,codeHtml)
